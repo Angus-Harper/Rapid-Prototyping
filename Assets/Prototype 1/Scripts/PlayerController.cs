@@ -9,7 +9,13 @@ public class PlayerController : MonoBehaviour
     private float powerUpStrength = 15.0f;
     public float speed = 5.0f;
     public bool hasPowerUp;
+    public bool hasFirePowerUp;
+    public bool start = false;
     public GameObject powerUpIndicator;
+    public GameObject firePowerUpIndicator;
+    public GameObject playerIndicator;
+    public GameObject spawnManager;
+    public GameObject gameStart;
 
     void Start()
     {
@@ -19,9 +25,21 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        Vector3 playerPos = transform.position + new Vector3(0, -0.5f, 0);
         float forwardInpiut = Input.GetAxis("Vertical");
         playerRb.AddForce(focalPoint.transform.forward * speed * forwardInpiut);
-        powerUpIndicator.transform.position = transform.position + new Vector3(0, -0.5f, 0);
+        powerUpIndicator.transform.position = playerPos;
+        firePowerUpIndicator.transform.position = playerPos;
+        playerIndicator.transform.position = playerPos;
+
+        if (transform.position.y < -10 && start == true)
+        {
+            transform.position = new Vector3(0, 0.13f, 0);
+        }
+        else if (transform.position.y < -10 && start == false)
+        {
+            transform.position = new Vector3(0, 0.13f, 0);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -33,12 +51,27 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(PowerUpCountDownRoutine());
             powerUpIndicator.gameObject.SetActive(true);
         }
+        if (other.CompareTag("FirePowerUp"))
+        {
+            hasFirePowerUp = true;
+            Destroy(other.gameObject);
+            StartCoroutine(PowerUpCountDownRoutine());
+            firePowerUpIndicator.gameObject.SetActive(true);
+        }
+        if (other.CompareTag("StartGame"))
+        {
+            start = true;
+            Instantiate(spawnManager, transform.position, transform.rotation);
+            Destroy(other.gameObject);
+        }
     }
     IEnumerator PowerUpCountDownRoutine()
     {
         yield return new WaitForSeconds(7);
         hasPowerUp = false;
+        hasFirePowerUp = false;
         powerUpIndicator.gameObject.SetActive(false);
+        firePowerUpIndicator.gameObject.SetActive(false);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -51,5 +84,15 @@ public class PlayerController : MonoBehaviour
             Debug.Log("collided with " + collision.gameObject.name + "with poserup set to " + hasPowerUp);
             enemyRidgidbody.AddForce(awayFromPlayer * powerUpStrength, ForceMode.Impulse);
         }
+        if (collision.gameObject.CompareTag("Enemy") && hasFirePowerUp)
+        {
+            Destroy(collision.gameObject);
+        }
+    }
+
+    private Vector3 GSpawnPosition()  // Vector3 can replace Voids only if we "return" a value
+    {
+        Vector3 randomPos = new Vector3(-1, 0.15f, 8);
+        return randomPos;
     }
 }

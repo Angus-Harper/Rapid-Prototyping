@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public class TweenFun : JMC
+public class TweenFun : GameBehaviour
 {
     public GameObject player;
     public float moveDistance = 3;
@@ -21,6 +21,12 @@ public class TweenFun : JMC
             player.transform.DOMoveZ(player.transform.position.z - moveDistance, tweenTime).SetEase(moveEase);
             DoEffects();
         }
+
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            _UI.UpdateScore(10);
+        }
+            
     }
 
     void DoEffects()
