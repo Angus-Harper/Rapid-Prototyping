@@ -26,17 +26,13 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         Vector3 playerPos = transform.position + new Vector3(0, -0.5f, 0);
-        float forwardInpiut = Input.GetAxis("Vertical");
-        playerRb.AddForce(focalPoint.transform.forward * speed * forwardInpiut);
+        float forwardInpiut = Input.GetAxis("Horizontal");
+        playerRb.AddForce(focalPoint.transform.right * speed * forwardInpiut);
         powerUpIndicator.transform.position = playerPos;
         firePowerUpIndicator.transform.position = playerPos;
         playerIndicator.transform.position = playerPos;
 
-        if (transform.position.y < -10 && start == true)
-        {
-            transform.position = new Vector3(0, 0.13f, 0);
-        }
-        else if (transform.position.y < -10 && start == false)
+        if (transform.position.y < -100)
         {
             transform.position = new Vector3(0, 0.13f, 0);
         }
