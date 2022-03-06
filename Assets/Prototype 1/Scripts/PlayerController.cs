@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -8,23 +9,35 @@ public class PlayerController : MonoBehaviour
     private GameObject focalPoint;
     private float powerUpStrength = 15.0f;
     public float speed = 5.0f;
+    public float jumpHeight = 6;
+    public float grv = 9.81f;
     public bool hasPowerUp;
     public bool hasFirePowerUp;
     public bool start = false;
+    public bool isGrounded;
+    public float cointP;
+    public Transform groundCheck;
+    public float groundDistance = 0.4f;
+    public LayerMask layer;
+    Vector3 jump;
     public GameObject powerUpIndicator;
     public GameObject firePowerUpIndicator;
     public GameObject playerIndicator;
     public GameObject spawnManager;
-    public GameObject gameStart;
+    public GameObject coin;
+    public GameObject tP;
 
     void Start()
     {
         playerRb = GetComponent<Rigidbody>();
         focalPoint = GameObject.Find("FocalPoint");
+        jump = new Vector3(0.0f, 2.0f, 0.0f);
     }
 
     void Update()
     {
+        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, layer);
+
         Vector3 playerPos = transform.position + new Vector3(0, -0.5f, 0);
         float forwardInpiut = Input.GetAxis("Horizontal");
         playerRb.AddForce(focalPoint.transform.right * speed * forwardInpiut);
@@ -34,7 +47,13 @@ public class PlayerController : MonoBehaviour
 
         if (transform.position.y < -100)
         {
-            transform.position = new Vector3(0, 0.13f, 0);
+            Scene scene = SceneManager.GetActiveScene();
+            SceneManager.LoadScene(scene.name);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        {
+            playerRb.AddForce(jump * jumpHeight, ForceMode.Impulse);
         }
     }
 
@@ -54,11 +73,18 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(PowerUpCountDownRoutine());
             firePowerUpIndicator.gameObject.SetActive(true);
         }
-        if (other.CompareTag("StartGame"))
+        if (other.CompareTag("Coin"))
         {
-            start = true;
-            Instantiate(spawnManager, transform.position, transform.rotation);
+            cointP++;
             Destroy(other.gameObject);
+        }
+        if (other.CompareTag("TP"))
+        {
+            transform.position = new Vector3(-102, 47, 0);
+        }
+        if (other.CompareTag("Bounce"))
+        {
+            playerRb.AddForce(jump * 27, ForceMode.Impulse);
         }
     }
     IEnumerator PowerUpCountDownRoutine()

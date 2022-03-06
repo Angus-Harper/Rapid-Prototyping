@@ -8,6 +8,7 @@ namespace Proto1
     {
         public float bestTime;
         public float currentTime;
+        public PlayerController player;
         Timer timer;
 
         private void Start()
@@ -33,7 +34,7 @@ namespace Proto1
                 _UI.UpdateCurrentTime(timer.GetTimer());
 
             }
-            if (Input.GetKeyDown(KeyCode.F))
+            if (player.cointP > 8)
             {
                 GameOver();
             }

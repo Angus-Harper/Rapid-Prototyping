@@ -9,11 +9,14 @@ TagManager:
   - FirePowerUp
   - SlowPowerUp
   - StartGame
+  - Coin
+  - TP
+  - Bounce
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ground
   - Water
   - UI
   - 
