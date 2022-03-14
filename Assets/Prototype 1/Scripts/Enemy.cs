@@ -6,12 +6,11 @@ public class Enemy : MonoBehaviour
 {
     public float speed;
     private Rigidbody enemyRb;
-    private GameObject player;
+    public GameObject player;
 
     void Start()
     {
         enemyRb = GetComponent<Rigidbody>();
-        player = GameObject.Find("Player");
     }
 
     void Update()
