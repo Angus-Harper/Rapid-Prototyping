@@ -8,6 +8,8 @@ public class SpawnEnemy : MonoBehaviour
     public GameObject enemy;
 
     public Transform[] pos;
+    public List<AreaTrigger> areaTrigger;
+
     public int enemyCount;
     // Start is called before the first frame update
     void Start()
@@ -31,7 +33,19 @@ public class SpawnEnemy : MonoBehaviour
 
         for (int i = 0; i < enemyPos; i++)
         {
-            Instantiate(enemy, pos[i].position, pos[i].rotation);
+            GameObject go = Instantiate(enemy, pos[i].position, pos[i].rotation);
+            areaTrigger[i].AddEnemeies(go);
+        }
+    }
+
+    public void Kill(GameObject enemy)
+    {
+        for(int i = 0; i < areaTrigger.Count; i++)
+        { 
+            if (areaTrigger[i].enemies.Contains(enemy))
+            {
+                areaTrigger[i].RemoveEnemies(enemy);
+            }
         }
     }
 }

@@ -22,6 +22,14 @@ public class PauseControler : GameBehaviour
         {
             Pause();
         }
+        if (pause == true)
+        {
+            Cursor.lockState = CursorLockMode.Confined;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+        }
     }
 
     public void Pause()

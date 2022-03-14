@@ -7,6 +7,9 @@ public class FiringPoint : MonoBehaviour
     [Header("Raycast Stuff")]
     public float maxDistance = 100f;
     public LayerMask layerMask;
+
+    public SpawnEnemy spawnEnemy;
+
     // Update is called once per frame
     void Update()
     {
@@ -17,7 +20,7 @@ public class FiringPoint : MonoBehaviour
             if (Physics.Raycast(ray, out hitInfo, maxDistance, layerMask))
             {
                 hitInfo.collider.GetComponent<Renderer>().material.color = Color.red;
-                Destroy(hitInfo.collider.gameObject, .5f);
+                spawnEnemy.Kill(hitInfo.collider.gameObject);
             }
         }
     }
