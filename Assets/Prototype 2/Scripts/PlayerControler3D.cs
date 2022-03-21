@@ -8,6 +8,7 @@ public class PlayerControler3D : MonoBehaviour
     public Transform cam;
 
     public float speed = 6f;
+    bool upperLevel = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +30,20 @@ public class PlayerControler3D : MonoBehaviour
         if (pspeed != 0 && (transform.rotation.y != cam.rotation.y))
         {
             transform.rotation = cam.rotation;
+        }
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            upperLevel = !upperLevel;
+        }
+
+        if (upperLevel == true)
+        {
+            transform.position = new Vector3(transform.position.x,19,transform.position.z);
+        }
+        else if (upperLevel == false)
+        {
+            transform.position = new Vector3(transform.position.x, 3, transform.position.z);
         }
     }
 }

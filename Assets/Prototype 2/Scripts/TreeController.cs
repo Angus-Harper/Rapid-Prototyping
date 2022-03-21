@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class TreeController : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class TreeController : MonoBehaviour
     public int currentHp;
 
     public HealthBar healthbar;
+
+    public SpawnEnemy spawnEnemy;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,7 +22,10 @@ public class TreeController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (currentHp <= 0)
+        {
+            SceneManager.LoadScene("Title");
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -28,7 +34,7 @@ public class TreeController : MonoBehaviour
         {
             currentHp--;
             healthbar.SetHealth(currentHp);
-            Destroy(collision.gameObject);
+            spawnEnemy.Kill(collision.gameObject);
         }
     }
 }
