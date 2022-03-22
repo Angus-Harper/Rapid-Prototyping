@@ -389,7 +389,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.2
+  force: 0.15
   rot: 0
+  timer: 8.333333
 --- !u!135 &1776286548
 SphereCollider:
   m_ObjectHideFlags: 0
