@@ -1,43 +1,61 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Boat : MonoBehaviour
 {
-    public float speed = 0.2f;
+    public float speed = 0.8f;
     public float force = 0.05f;
     float rotate;
     public int rot;
+    public int rotRead;
     public float timer;
+    float postTimer;
     float maxTime = 500f / 60;
+
+    public GameObject image;
+    public Texture[] windSock;
+
     // Start is called before the first frame update
     void Start()
     {
         timer = maxTime;
-        randomRotate();
+        rot = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
         timer = timer - 1f * Time.deltaTime;
+        postTimer = postTimer - 1f * Time.deltaTime;
         float x = Input.GetAxis("Horizontal");
         transform.Rotate(Vector3.forward * x * speed);
-
+        image.GetComponent<RawImage>().texture = windSock[rot];
         if (timer <= 0)
         {
             randomRotate();
         }
         if (rot == 0)
         {
+            rotRead = 0;
         }
         else if (rot == 1)
         {
-            transform.Rotate(Vector3.forward * force);
+            if (postTimer <= 0)
+            {
+                transform.Rotate(Vector3.forward * force);
+            }
+            rotRead = 1;
         }
         else if (rot == 2)
         {
-            transform.Rotate(Vector3.forward * -force);
+            if (postTimer <= 0)
+            {
+                transform.Rotate(Vector3.forward * -force);
+            }
+            rotRead = 2;
         }
     }
 
@@ -45,5 +63,13 @@ public class Boat : MonoBehaviour
     {
         rot = Random.Range(0, 3);
         timer = maxTime;
+        if (rot == rotRead)
+        {
+
+        }
+        else
+        {
+            postTimer = maxTime / 2;
+        }
     }
 }

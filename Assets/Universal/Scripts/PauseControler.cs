@@ -7,6 +7,7 @@ public class PauseControler : GameBehaviour
 
     public GameObject pausePanel;
     bool pause = false;
+    public bool doNoHideMouse;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,13 +23,20 @@ public class PauseControler : GameBehaviour
         {
             Pause();
         }
-        if (pause == true)
+        if (doNoHideMouse == false)
         {
-            Cursor.lockState = CursorLockMode.Confined;
+            if (pause == true)
+            {
+                Cursor.lockState = CursorLockMode.Confined;
+            }
+            else
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+            }
         }
         else
         {
-            Cursor.lockState = CursorLockMode.Locked;
+
         }
     }
 
@@ -38,5 +46,13 @@ public class PauseControler : GameBehaviour
         pause = !pause;
         pausePanel.SetActive(pause);
         Time.timeScale = pause ? 0 : 1; // changes game speed 0 = stop, 0.5 = half, 1 = full speed, 2 = double speed
+        if (pause == true)
+        {
+            Time.timeScale = 0;
+        }
+        else
+        {
+            Time.timeScale = 1;
+        }
     }
 }
