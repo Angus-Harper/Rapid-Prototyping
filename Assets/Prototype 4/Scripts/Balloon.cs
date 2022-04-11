@@ -28,7 +28,7 @@ public class Balloon : MonoBehaviour
     {
         if (other.tag == "Rock")
         {
-            door.doorNumber -= number;
+            door.doorNumber += number;
             Destroy(gameObject);
         }
     }
