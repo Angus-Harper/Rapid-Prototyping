@@ -111,7 +111,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   number: 0
   text: {fileID: 6195271774322468249}
+  oBDoor: {fileID: 0}
   door: {fileID: 0}
+  lifeTime: 20
 --- !u!1 &6195271774322468255
 GameObject:
   m_ObjectHideFlags: 0

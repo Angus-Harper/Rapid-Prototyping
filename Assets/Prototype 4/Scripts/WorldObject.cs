@@ -1,28 +1,41 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class WorldObject : MonoBehaviour
 {
+    public TMP_Text ammo;
     public GameObject balloon;
-    public int balloonCount = 5;
     private float spawnRangex = 8;
     private float spawnRangey = 4;
-    public float time = 10;
+    public float time = 5;
+    public int ammoType;
+    public bool won; 
     // Start is called before the first frame update
     void Start()
     {
-        
+        won = false;
     }
 
     // Update is called once per frame
     void Update()
     {
         time = time - 1 * Time.deltaTime;
-        if (time <= 0)
+        if (time <= 0 && won == false)
         {
             Instantiate(balloon, GenerateSpawnPosition(), balloon.transform.rotation);
-            time = 10;
+            time = 5;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            ammoType = 1;
+            ammo.text = "+";
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            ammoType = 2;
+            ammo.text = "-";
         }
     }
 

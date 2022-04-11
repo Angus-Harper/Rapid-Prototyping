@@ -9,27 +9,50 @@ public class Balloon : MonoBehaviour
     public TextMeshPro text;
     public GameObject oBDoor;
     public Door door;
+    public GameObject oBworld;
+    public WorldObject world;
+    public float lifeTime = 20;
+    //public int amoType = 0;
     // Start is called before the first frame update
     void Start()
     {
         oBDoor = GameObject.Find("Door");
         door = oBDoor.GetComponent<Door>();
+        oBworld = GameObject.Find("WorldObject");
+        world = oBworld.GetComponent<WorldObject>();
         GetComponent<Renderer>().material.color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
-        number = Random.Range(-100, 100);
+        number = Random.Range(0, 100);
     }
-
     // Update is called once per frame
     void Update()
     {
+        if(door.doorNumber == 0)
+        {
+            world.won = true;
+        }
         text.text = number.ToString();
+        lifeTime = lifeTime - 1 * Time.deltaTime;
+        if (lifeTime <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Rock")
         {
-            door.doorNumber += number;
+            if (world.ammoType == 1)
+            {
+                door.doorNumber += number;
+            }
+            else if (world.ammoType == 2)
+            {
+                door.doorNumber -= number;
+            }
+            Destroy(other.gameObject);
             Destroy(gameObject);
+
         }
     }
 }
