@@ -6,6 +6,8 @@ public class Bow : MonoBehaviour
 {
     public GameObject projectilePrefab;
     public Transform firingPoint;
+    public AudioSource audioSource;
+    public AudioClip shoot;
 
     public float projectileSpeed = 1000f;
     // Start is called before the first frame update
@@ -19,6 +21,7 @@ public class Bow : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire1"))
         {
+            audioSource.PlayOneShot(shoot);
             GameObject projectileInstance;
             projectileInstance = Instantiate(projectilePrefab, firingPoint.position, firingPoint.rotation);
             projectileInstance.GetComponent<Rigidbody>().AddForce(firingPoint.right * projectileSpeed);

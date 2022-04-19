@@ -6,10 +6,14 @@ using TMPro;
 public class Door : MonoBehaviour
 {
     public int doorNumber;
+    public int doorTarget;
     public TextMeshPro text;
+    public AudioSource audioSource;
+    public AudioClip key;
     // Start is called before the first frame update
     void Start()
     {
+
         doorNumber = Random.Range(-100, 100);
     }
 
@@ -18,8 +22,9 @@ public class Door : MonoBehaviour
     {
         text.text = doorNumber.ToString();
 
-        if (doorNumber == 0)
+        if (doorNumber == doorTarget)
         {
+            audioSource.PlayOneShot(key);
             Destroy(gameObject);
         }
     }
