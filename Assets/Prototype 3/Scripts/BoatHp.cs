@@ -23,7 +23,7 @@ public class BoatHp : MonoBehaviour
     {
         if (currentHp <= 0)
         {
-            SceneManager.LoadScene("Title");
+            SceneManager.LoadScene("P3Lost");
         }
 
     }

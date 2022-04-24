@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 namespace Proto1
 { 
@@ -9,13 +10,23 @@ namespace Proto1
     {
         public TMP_Text scoreText;
         public PlayerController player;
+        public PauseControler pauseCon;
 
         public TMP_Text bestTimeText;
+        public TMP_Text bestTimeText1;
         public TMP_Text currentTimeText;
         public TMP_Text coins;
+        public GameObject winCanvas;
         public void Update()
         {
             scoreText.text = player.cointP + "/9";
+
+            if (player.cointP >= 9)
+            {
+                pauseCon.pause = true;
+                pauseCon.hascontrol = false;
+                winCanvas.SetActive(true);
+            }
         }
         public void UpdateScore(int _score)
         {
@@ -35,6 +46,7 @@ namespace Proto1
             else 
             {
                 bestTimeText.text = "Best Time: " + _time.ToString("F3");
+                bestTimeText1.text = "Best Time: " + _time.ToString("F3");
             }
         }
     }

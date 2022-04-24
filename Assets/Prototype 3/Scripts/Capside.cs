@@ -16,7 +16,7 @@ public class Capside : MonoBehaviour
     {
         if (transform.localEulerAngles.z > 100 && transform.localEulerAngles.z < 180 || transform.localEulerAngles.z > 180 && transform.localEulerAngles.z < 260)
         {
-            SceneManager.LoadScene("Title");
+            SceneManager.LoadScene("P3Lost");
         }
         else
         {

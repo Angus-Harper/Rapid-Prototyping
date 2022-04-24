@@ -12,8 +12,17 @@ EditorBuildSettings:
     path: Assets/Prototype 1/Scenes/Prototype 1.unity
     guid: a4b96ad7a65484fd4a83cb97540eee50
   - enabled: 1
+    path: Assets/Prototype 3/Scenes/P3Lost.unity
+    guid: 42de66eb8cad4e34cbf2852092a471dd
+  - enabled: 1
+    path: Assets/Prototype 3/Scenes/P3Won.unity
+    guid: e57804874b5b9ec498b34be58daa37dd
+  - enabled: 1
     path: Assets/Prototype 2/Scenes/Prototype 2.unity
     guid: 7a2c3d629c4a40b4b98d5dea97b7f42a
+  - enabled: 1
+    path: Assets/Prototype 2/Scenes/P2Won.unity
+    guid: c78976fdb13a8a442840270f679e29e8
   - enabled: 1
     path: Assets/Prototype 3/Scenes/PreProto3.unity
     guid: b07d1dde115aeee449a3adfd6c531991
@@ -26,6 +35,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Prototype 4/Scenes/Calculator.unity
     guid: 771b82c6244885d4e8823507a5063d6b
+  - enabled: 1
+    path: Assets/Prototype 2/Scenes/P2Lost.unity
+    guid: 496f979e756d3c04f8c92258c01f987a
   - enabled: 1
     path: Assets/Prototype 4/Scenes/GameEnd.unity
     guid: 480b45cca3f638a4a85418c11b2b60e1

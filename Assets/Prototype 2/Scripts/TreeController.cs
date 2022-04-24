@@ -24,7 +24,7 @@ public class TreeController : MonoBehaviour
     {
         if (currentHp <= 0)
         {
-            SceneManager.LoadScene("Title");
+            SceneManager.LoadScene("P2Lost");
         }
     }
 

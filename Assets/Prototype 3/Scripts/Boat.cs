@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class Boat : MonoBehaviour
 {
-    public float speed = 0.8f;
+    public float speed = 0.4f;
     public float force = 0.05f;
     float rotate;
     public int rot;
@@ -31,7 +31,7 @@ public class Boat : MonoBehaviour
         timer = timer - 1f * Time.deltaTime;
         postTimer = postTimer - 1f * Time.deltaTime;
         float x = Input.GetAxis("Horizontal");
-        transform.Rotate(Vector3.forward * x * speed);
+        transform.Rotate(Vector3.forward * x * speed * Time.deltaTime);
         image.GetComponent<RawImage>().texture = windSock[rot];
         if (timer <= 0)
         {
@@ -45,7 +45,7 @@ public class Boat : MonoBehaviour
         {
             if (postTimer <= 0)
             {
-                transform.Rotate(Vector3.forward * force);
+                transform.Rotate(Vector3.forward * force * Time.deltaTime);
             }
             rotRead = 1;
         }
@@ -53,7 +53,7 @@ public class Boat : MonoBehaviour
         {
             if (postTimer <= 0)
             {
-                transform.Rotate(Vector3.forward * -force);
+                transform.Rotate(Vector3.forward * -force * Time.deltaTime);
             }
             rotRead = 2;
         }

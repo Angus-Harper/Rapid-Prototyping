@@ -6,7 +6,8 @@ public class PauseControler : GameBehaviour
 {
 
     public GameObject pausePanel;
-    bool pause = false;
+    public bool pause = false;
+    public bool hascontrol = true;
     public bool doNoHideMouse;
     // Start is called before the first frame update
     void Start()
@@ -19,7 +20,8 @@ public class PauseControler : GameBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
+        pausePanel.SetActive(pause);
+        if (Input.GetKeyDown(KeyCode.Escape) && hascontrol == true)
         {
             Pause();
         }
@@ -44,7 +46,7 @@ public class PauseControler : GameBehaviour
     {
         Debug.Log("fdesge");
         pause = !pause;
-        pausePanel.SetActive(pause);
+        //pausePanel.SetActive(pause);
         Time.timeScale = pause ? 0 : 1; // changes game speed 0 = stop, 0.5 = half, 1 = full speed, 2 = double speed
         if (pause == true)
         {
