@@ -13,6 +13,7 @@ TagManager:
   - TP
   - Bounce
   - Rock
+  - Wall
   layers:
   - Default
   - TransparentFX
